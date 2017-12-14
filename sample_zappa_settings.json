@@ -1,0 +1,14 @@
+{
+    "prod": {
+        "aws_region": "us-west-2", 
+        "django_settings": "insurance.prod_settings", 
+        "profile_name": "default", 
+        "project_name": "insurance", 
+        "runtime": "python2.7", 
+        "s3_bucket": "zappa-2ou822aaz",
+        "vpc_config" : {
+            "SubnetIds": [ "subnet-xxxxxxxx","subnet-yyyyyyyy" ],
+            "SecurityGroupIds": [ "sg-zzzzzzzz" ]
+        }
+    }
+}
