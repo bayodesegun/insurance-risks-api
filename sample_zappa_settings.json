@@ -9,6 +9,8 @@
         "vpc_config" : {
             "SubnetIds": [ "subnet-xxxxxxxx","subnet-yyyyyyyy" ],
             "SecurityGroupIds": [ "sg-zzzzzzzz" ]
-        }
+        },
+        "certificate_arn": "arn:aws:acm:***********************************************",
+        "domain": "api.example.com",
     }
 }
