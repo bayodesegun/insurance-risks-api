@@ -56,8 +56,8 @@ class ModelViewTestCase(TestCase):
             reverse('risk_data',
             kwargs={'pk': self.risk.id}), format="json")
         risks_get_resp = new_client.get("/risks/", format="json")
-        self.assertEqual(risk_get_resp.status_code, status.HTTP_401_UNAUTHORIZED)
-        self.assertEqual(risks_get_resp.status_code, status.HTTP_401_UNAUTHORIZED)
+        self.assertEqual(risk_get_resp.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(risks_get_resp.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_authorization_is_enforced_for_single_risk_requests(self):
         """Test that the api has user authorization."""
