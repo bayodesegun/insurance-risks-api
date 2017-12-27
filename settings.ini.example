@@ -6,3 +6,4 @@ DB_PASSWORD=password
 ALLOWED_HOSTS=127.0.0.1, .herokuapp.com
 DB_HOST=remote.postgres.db.host
 DB_PORT=5432
+AWS_STORAGE_BUCKET_NAME=zappa-static-xyz123abcdef

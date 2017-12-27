@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'risks',
     'rest_framework.authtoken',
+    'storages',
 ]
 
 MIDDLEWARE = [
