@@ -55,11 +55,37 @@ To run your own build, please follow the steps below.
   ```bash
   $ python manage.py test
   ```
-- Browse the API endpoints (*test users/passwords*: geek/password, nerd/password):
-  ```
-  - http://127.0.0.1:8000/risks/  # list all risks for a given user
-  - http://127.0.0.1:8000/risks/{riskId} # display details for a given risk
-  ```
+- Browsable API endpoints (*test users/passwords*: geek/password, nerd/password):
+  - [http://127.0.0.1:8000/risks/](http://127.0.0.1:8000/risks/)  - list all risks for a given user
+  - [http://127.0.0.1:8000/risks/{riskId}](http://127.0.0.1:8000/risks/1) - display details for a given risk
+
+- Fire GET requests the API endpoints (*test users/passwords*: geek/password, nerd/password):
+  - Make a POST call to endpoint ```http://127.0.0.1:8000/obtain_token/``` to obtain a token. Example using shell cURL:
+    ```bash
+    curl --request POST \
+    --url http://127.0.0.1:8000/obtain-token/ \
+    --header 'cache-control: no-cache' \
+    --header 'content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' \
+    --form username=geek \
+    --form password=password
+    ```
+  - Make the respective GET calls using obtained token: 
+     - http://127.0.0.1:8000/risks/
+     ```bash
+     curl --request GET \
+      --url http://127.0.0.1:8000/risks/ \
+      --header 'authorization: Token 08ec57851cc4dd4e252cc0cefd6b56421f3c35f6' \
+      --header 'cache-control: no-cache' \
+      --header 'content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW'     
+     ```
+     - http://127.0.0.1:8000/risks/{riskId}
+      ```bash
+      curl --request GET \
+        --url http://127.0.0.1:8000/risks/1/ \
+        --header 'authorization: Token 08ec57851cc4dd4e252cc0cefd6b56421f3c35f6' \
+        --header 'cache-control: no-cache' \
+        --header 'content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW'     
+      ```
+     
 - Configure and use Zappa:
   - Check out [this helpful guide](https://edgarroman.github.io/zappa-django-guide/).
-
