@@ -9,6 +9,7 @@ env:
     - PYTHONPATH="/home/travis/build/bayodesegun/insurance-risks-api"
     - PIP_USE_MIRRORS=true
     - BUILD_ON_TRAVIS=true
+    - ALLOWED_HOSTS=[] # Django will validate against localhost
   matrix:
     - DJANGO=1.7
 
@@ -23,4 +24,3 @@ before_script:
 # run the test suite
 script:
   - python manage.py test
-  
