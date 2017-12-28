@@ -4,8 +4,8 @@ A serverless Django API project.
 [![Build Status](https://travis-ci.org/bayodesegun/insurance-risks-api.svg?branch=master)](https://travis-ci.org/bayodesegun/insurance-risks-api)
 
 ## Technologies used
-* [Django](https://www.djangoproject.com/): 'The web framework for perfectionists with deadlines'.
-* [DRF](www.django-rest-framework.org/): A powerful and flexible toolkit for building Web APIs.
+* [Django](https://www.djangoproject.com/): The web framework for perfectionists with deadlines.
+* [DRF](http://www.django-rest-framework.org/): A powerful and flexible toolkit for building Web APIs.
 * [Zappa](https://github.com/Miserlou/Zappa): Serverless Python Web Services.
 
 
