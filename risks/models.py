@@ -24,7 +24,7 @@ class Risk(models.Model):
     name = models.CharField(max_length=200)
     
     def __str__(self):
-        return "%s_%s" % (self.insurer_id, self.name)
+        return "%s_%s" % (self.insurer, self.name)
 
     def get_data(self):
         fields = self.field_set.all()
@@ -52,7 +52,7 @@ class Field(models.Model):
     type = models.IntegerField(choices=FIELD_TYPES)
     name = models.CharField(max_length=200)
     def __str__(self):
-        return self.name
+        return "%s_%s" % (self.risk, self.name)
     def get_choices(self):
         if self.type == 4:
             return list(self.choice_set.values_list("text", flat=True))
@@ -64,7 +64,7 @@ class Choice(models.Model):
     field = models.ForeignKey(Field, on_delete=models.CASCADE)
     text = models.TextField()
     def __str__(self):
-        return self.text
+        return "%s_%s" % (self.field, self.text)
 
 # This receiver handles token creation immediately a new user is created.
 @receiver(post_save, sender=User)
