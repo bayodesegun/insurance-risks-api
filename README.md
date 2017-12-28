@@ -1,7 +1,13 @@
 # insurance-risks-api
-A serverless Django API project.
+A serverless Django API project. 
 
 [![Build Status](https://travis-ci.org/bayodesegun/insurance-risks-api.svg?branch=master)](https://travis-ci.org/bayodesegun/insurance-risks-api)
+
+## API Endpoints
+- (*test users/passwords*: geek/password, nerd/password)
+- ``POST`` ``/obtain_token/`` - obtain authentication token
+- ``GET`` [/risks/](https://api.ins-risks.bayodesegun.com/risks/)  - list all risks for a given user
+- ``GET`` [/risks/{riskId}](https://api.ins-risks.bayodesegun.com/risks/1) - display details for a given risk
 
 ## Technologies used
 * [Django](https://www.djangoproject.com/): The web framework for perfectionists with deadlines.
@@ -55,15 +61,11 @@ To run your own build, please follow the steps below.
   ```bash
   $ python manage.py test
   ```
-- Browsable API endpoints (*test users/passwords*: geek/password, nerd/password):
-  - [http://127.0.0.1:8000/risks/](http://127.0.0.1:8000/risks/)  - list all risks for a given user
-  - [http://127.0.0.1:8000/risks/{riskId}](http://127.0.0.1:8000/risks/1) - display details for a given risk
-
-- Fire GET requests the API endpoints (*test users/passwords*: geek/password, nerd/password):
-  - Make a POST call to endpoint ```http://127.0.0.1:8000/obtain_token/``` to obtain a token. Example using shell cURL:
+- Test the API endpoints (*test users/passwords*: geek/password, nerd/password):
+  - Make a POST call to endpoint ```/obtain_token/``` to obtain a token. Example using shell cURL:
     ```bash
     curl --request POST \
-    --url http://127.0.0.1:8000/obtain-token/ \
+    --url https://api.ins-risks.bayodesegun.com/obtain-token/ \
     --header 'cache-control: no-cache' \
     --header 'content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' \
     --form username=geek \
@@ -73,7 +75,7 @@ To run your own build, please follow the steps below.
      - /risks/ endpoint
      ```bash
      curl --request GET \
-      --url http://127.0.0.1:8000/risks/ \
+      --url https://api.ins-risks.bayodesegun.com/risks/ \
       --header 'authorization: Token 08ec57851cc4dd4e252cc0cefd6b56421f3c35f6' \
       --header 'cache-control: no-cache' \
       --header 'content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW'     
@@ -81,7 +83,7 @@ To run your own build, please follow the steps below.
      - /risks/{riskId} endpoint
       ```bash
       curl --request GET \
-        --url http://127.0.0.1:8000/risks/1/ \
+        --url https://api.ins-risks.bayodesegun.com/risks/1/ \
         --header 'authorization: Token 08ec57851cc4dd4e252cc0cefd6b56421f3c35f6' \
         --header 'cache-control: no-cache' \
         --header 'content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW'     
