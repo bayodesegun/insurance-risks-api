@@ -70,7 +70,7 @@ To run your own build, please follow the steps below.
     --form password=password
     ```
   - Make the respective GET calls using obtained token: 
-     - http://127.0.0.1:8000/risks/
+     - /risks/ endpoint
      ```bash
      curl --request GET \
       --url http://127.0.0.1:8000/risks/ \
@@ -78,7 +78,7 @@ To run your own build, please follow the steps below.
       --header 'cache-control: no-cache' \
       --header 'content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW'     
      ```
-     - http://127.0.0.1:8000/risks/{riskId}
+     - /risks/{riskId} endpoint
       ```bash
       curl --request GET \
         --url http://127.0.0.1:8000/risks/1/ \
