@@ -28,7 +28,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('type', models.IntegerField(choices=[(1, 'text'), (2, 'number'), (3, 'date'), (4, 'enum')])),
                 ('name', models.CharField(max_length=50)),
-                ('choices', models.ManyToManyField(to='risks.Choice')),
+                ('choices', models.ManyToManyField(blank=True, to='risks.Choice')),
             ],
         ),
         migrations.CreateModel(

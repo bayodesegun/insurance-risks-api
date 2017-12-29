@@ -30,7 +30,7 @@ class Field(models.Model):
     name = models.CharField(max_length=50)
 
     # Choices
-    choices = models.ManyToManyField(Choice)
+    choices = models.ManyToManyField(Choice, blank=True) # optional
         
 
     def __str__(self):
@@ -50,7 +50,7 @@ class Risk(models.Model):
     name = models.CharField(max_length=50)
     
     # Fields
-    fields = models.ManyToManyField(Field)
+    fields = models.ManyToManyField(Field) # this, unlike `options`, is required
 
     class Meta:
         # no point for an insurer to create risks of the same name
