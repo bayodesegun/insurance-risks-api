@@ -16,18 +16,51 @@ FIELD_TYPES = (
 )
 
 @python_2_unicode_compatible
+class Choice(models.Model):
+    text = models.CharField(max_length=200, unique=True) # since we can assign them to multiple fields, no need for duplicates
+    
+    def __str__(self):
+        return self.text
+
+@python_2_unicode_compatible
+class Field(models.Model):
+    # this model requires the most flexibility as we can have the the same type and name but different choices
+    # unique or unique_together not applicable?    
+    type = models.IntegerField(choices=FIELD_TYPES)
+    name = models.CharField(max_length=50)
+
+    # Choices
+    choices = models.ManyToManyField(Choice)
+        
+
+    def __str__(self):
+        return self.name
+    def get_choices(self):
+        if self.type == 4:
+            return list(self.choices.values_list("text", flat=True))
+        else:
+            return None
+
+@python_2_unicode_compatible
 class Risk(models.Model):
     # Since there will be multiple insurers, there should be something to differentiate them
     insurer = models.ForeignKey('auth.User', related_name='risks', on_delete=models.CASCADE)
-
-    # Name of the risk
-    name = models.CharField(max_length=200)
     
+    # Name of the risk
+    name = models.CharField(max_length=50)
+    
+    # Fields
+    fields = models.ManyToManyField(Field)
+
+    class Meta:
+        # no point for an insurer to create risks of the same name
+        unique_together = ('insurer', 'name')
+
     def __str__(self):
         return "%s_%s" % (self.insurer, self.name)
 
     def get_data(self):
-        fields = self.field_set.all()
+        fields = self.fields.all()
         fields_array = []
         for field in fields:
             field_data = {
@@ -44,27 +77,6 @@ class Risk(models.Model):
         }
 
         return data
-
-
-@python_2_unicode_compatible
-class Field(models.Model):
-    risk = models.ForeignKey(Risk, on_delete=models.CASCADE)
-    type = models.IntegerField(choices=FIELD_TYPES)
-    name = models.CharField(max_length=200)
-    def __str__(self):
-        return "%s_%s" % (self.risk, self.name)
-    def get_choices(self):
-        if self.type == 4:
-            return list(self.choice_set.values_list("text", flat=True))
-        else:
-            return None 
-
-@python_2_unicode_compatible
-class Choice(models.Model):
-    field = models.ForeignKey(Field, on_delete=models.CASCADE)
-    text = models.TextField()
-    def __str__(self):
-        return "%s_%s" % (self.field, self.text)
 
 # This receiver handles token creation immediately a new user is created.
 @receiver(post_save, sender=User)

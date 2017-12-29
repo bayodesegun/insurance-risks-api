@@ -21,7 +21,7 @@ class ModelViewTestCase(TestCase):
         self.client.force_authenticate(user=self.user)
         self.risk_name = "Vehicle"
         self.field_name = "Lastname"
-        self.option_text = "Comprehensive"
+        self.option_text = "Comprehensive Test"
         self.risk = Risk(insurer=self.user, name=self.risk_name)
 
     def test_risk_model_can_create_a_risk_type(self):
@@ -35,16 +35,16 @@ class ModelViewTestCase(TestCase):
         """Test the Field model can create a field."""
         old_count = Field.objects.count()
         self.risk.save()
-        field = self.risk.field_set.create(type=1, name=self.field_name)
+        field = self.risk.fields.create(type=1, name=self.field_name)
         new_count = Field.objects.count()
         self.assertNotEqual(old_count, new_count)
 
     def test_choice_model_can_create_an_option(self):
-        """Test the Choice model can create an options."""
+        """Test the Choice model can create an option."""
         old_count = Choice.objects.count()
         self.risk.save()        
-        field = self.risk.field_set.create(type=4, name=self.field_name)
-        option = field.choice_set.create(text=self.option_text)
+        field = self.risk.fields.create(type=4, name=self.field_name)
+        option = field.choices.create(text=self.option_text)
         new_count = Choice.objects.count()
         self.assertNotEqual(old_count, new_count)
 
@@ -86,12 +86,12 @@ class ModelViewTestCase(TestCase):
     def test_api_can_get_correct_sigle_risk_data(self):
         """Test the api can get a correct data for a given insurer risk""" 
         self.risk.save()
-        field = self.risk.field_set.create(type=4, name=self.field_name)
-        option = field.choice_set.create(text=self.option_text)
+        field = self.risk.fields.create(type=4, name=self.field_name)
+        option = field.choices.create(text=self.option_text)
 
         response = self.client.get(
             reverse('risk_data',
             kwargs={'pk': self.risk.id}), format="json")
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)      
-        self.assertContains(response, '{"fields":[{"type":4,"name":"Lastname","options":["Comprehensive"]}],"risk":"Vehicle"}')
+        self.assertContains(response, '{"fields":[{"type":4,"name":"Lastname","options":["Comprehensive Test"]}],"risk":"Vehicle"}')
