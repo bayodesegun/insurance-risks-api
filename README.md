@@ -5,7 +5,7 @@ A serverless Django API project.
 
 ## API Endpoints
 - (*test users/passwords*: geek/password, nerd/password)
-- ``POST`` ``/obtain_token/`` - obtain authentication token
+- ``POST`` ``/obtain-token/`` - obtain authentication token
 - ``GET`` [/risks/](https://api.ins-risks.bayodesegun.com/risks/)  - list all risks for a given user
 - ``GET`` [/risks/{riskId}](https://api.ins-risks.bayodesegun.com/risks/1) - display details for a given risk
 
@@ -62,7 +62,7 @@ To run your own build, please follow the steps below.
   $ python manage.py test
   ```
 - Test the API endpoints (*test users/passwords*: geek/password, nerd/password):
-  - Make a POST call to endpoint ```/obtain_token/``` to obtain a token. Example using shell cURL:
+  - Make a POST call to endpoint ```/obtain-token/``` to obtain a token. Example using shell cURL:
     ```bash
     curl --request POST \
     --url https://api.ins-risks.bayodesegun.com/obtain-token/ \
